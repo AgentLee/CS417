@@ -8,7 +8,8 @@ import (
 )
 
 func index(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "CS417 Project")
+	fmt.Fprintf(w, "CS417 Project\n")
+	fmt.Fprintf(w, "Start --> /{netid}")
 }
 
 func students(w http.ResponseWriter, r *http.Request) {
