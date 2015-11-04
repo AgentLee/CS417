@@ -1,12 +1,14 @@
 package main
 
 import (
-    "log"
-    "net/http"
+	"log"
+	"net/http"
 )
 
 func main() {
-    router := NewRouter()
+	router := NewRouter()
 
-    log.Fatal(http.ListenAndServe(":1234", router))
+	// need to change to 1234
+	// 8080 because idk how to kill the running server
+	log.Fatal(http.ListenAndServe(":8080", router))
 }

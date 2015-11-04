@@ -1,34 +1,57 @@
 package main
 
-import (
-	"net/http"
-)
+import "net/http"
 
 type Route struct {
-	Name		string
-	Method		string
-	Pattern		string
-	HandlerFunc	http.HandlerFunc
+	Name        string
+	Method      string
+	Pattern     string
+	HandlerFunc http.HandlerFunc
 }
+
 type Routes []Route
 
-var routes = Routes {
+var routes = Routes{
 	Route {
-		"index",
+		"Index",
 		"GET",
 		"/",
-		index,
-	}, 
+		Index,
+	},
 	Route {
-		"students",
+		"Student home",
 		"GET",
-		"/students",
-		students,
-	}, 
+		"/Student",
+		StudentIndex,
+	},
 	Route {
-		"showStudent",
+		"List all students",
 		"GET",
-		"/students/{netid}",
-		showStudent,
+		"/Student/listall",
+		ListAll,
+	},
+	Route {
+		"Add a student",
+		"POST",
+		"/Student",
+		AddStudent,
+	},
+	Route {
+		"Get a student's info",
+		"GET",
+		"/Student/{netid}",
+		GetStudent,
+	},
+	Route {
+		"Delete student",
+		"DELETE",
+		"/Student",
+		RemoveStudent,
+	},
+	Route {
+		"Update information",
+		"UPDATE",
+		"/Student",
+		UpdateStudent,
 	},
 }
