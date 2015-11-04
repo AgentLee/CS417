@@ -85,5 +85,26 @@ func UpdateStudent (w http.ResponseWriter, r *http.Request) {
 }
 
 func RemoveStudent (w http.ResponseWriter, r *http.Request) {
+	var student Student
+	body, err := ioutil.ReadAll(io.LimitReader(r.Body, 1048576))
+	if err != nil {
+		panic(err)
+	}
+	if err := r.Body.Close(); err != nil {
+		panic(err)
+	}
+	if err := json.Unmarshal(body, &student); err != nil {
+		w.Header().Set("Content-Type", "application/json; charset=UTF-8")
+		w.WriteHeader(422) // unprocessable entity
+		if err := json.NewEncoder(w).Encode(err); err != nil {
+			panic(err)
+		}
+	}
 
+	s := RepoDeleteStudent(student.Year)
+	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
+	w.WriteHeader(http.StatusCreated)
+	if err := json.NewEncoder(w).Encode(s); err != nil {
+		panic(err)
+	}
 }
